@@ -6,7 +6,7 @@
 /*   By: asekkak <asekkak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 11:28:46 by asekkak           #+#    #+#             */
-/*   Updated: 2023/04/08 13:33:20 by asekkak          ###   ########.fr       */
+/*   Updated: 2023/04/10 10:42:53 by asekkak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void lexer(char *input)
 		newNode = add_node(string, j, i);
  		ft_add_back(&lst, newNode);
 	}
-	parser(lst);
+	parser(lst, input);
 }
 
 void sigint_handler_c(int sig) {
@@ -97,7 +97,7 @@ void sigint_handler_c(int sig) {
 }
 
 void sigint_handler_quit(int sig) {
-	 (void)sig;
+	(void)sig;
 }
 
 void minishell()
@@ -115,12 +115,12 @@ void minishell()
              printf("exit\n");
              break;
         }
-		  if (ft_strncmp(input, "exit",5) == 0) {
-            printf("Exiting...\n");
-            break;
-        }
+		// if (ft_strncmp(input, "exit",5) == 0) {
+        //     printf("Exiting...\n");
+        //     break;
+        // }
  		add_history(input);
-		 lexer(input);
+		lexer(input);
 		free(input);
  		
  	}

@@ -6,7 +6,7 @@
 /*   By: asekkak <asekkak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 11:29:14 by asekkak           #+#    #+#             */
-/*   Updated: 2023/04/08 13:25:25 by asekkak          ###   ########.fr       */
+/*   Updated: 2023/04/10 10:21:25 by asekkak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_lexer
  } t_lexer;
 
 //* *********parser****************
-void  parser(t_lexer *head);
+void parser(t_lexer *lst , char *input);
 //******************************** 
 t_lexer *add_node(char **content, int start, int end);
 void ft_add_back(t_lexer **lst, t_lexer *new);

@@ -6,7 +6,7 @@
 /*   By: asekkak <asekkak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 13:23:02 by asekkak           #+#    #+#             */
-/*   Updated: 2023/03/30 12:13:50 by asekkak          ###   ########.fr       */
+/*   Updated: 2023/04/10 13:04:08 by asekkak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,16 @@ int len_word(char const *s, char c)
 			i++;
 		if (s[i] == 34 && s[i])
 		{
-			count++;
 			i++;
+			count++;
 			while (s[i] != 34 && s[i])
+			{
 				i++;
+			}
+			if(s[i] == 34)
+				i++;
+			else
+				exit(0);
 		}
 		else if (s[i] == 39 && s[i])
 		{
@@ -37,11 +43,16 @@ int len_word(char const *s, char c)
 			i++;
 			while (s[i] != 39 && s[i])
 				i++;
+			if(s[i] == 39)
+				i++;
+			else
+				exit(0);
 		}
-		else if (s[i] != 34 && s[i])
+		else if (s[i] != ' ' && s[i])
 			count++;
-		while (s[i] && s[i] != c && s[i])
+		while (s[i] != c &&  s[i] != 39 &&  s[i] != 34  && s[i])
 			i++;
+	   
 	}
 	return (count);
 }
@@ -49,8 +60,7 @@ int len_word(char const *s, char c)
 int len_len_word(char const *s, char c, int i)
 {
 	int len;
-	//"med sekak"
-	len = 0;
+ 	len = 0;
 	while (s[i] && s[i] != c)
 	{
 		if (s[i] == 34)
@@ -117,15 +127,16 @@ int leword(char const *s, char c, int i)
 					i++;
  				}
   			}
-		}else if (s[i] == 34)
+			 
+		}else if (s[i] == 39)
 		{
 			i++;
-			while (s[i] != 34)
+			while (s[i] != 39)
 				i++;
-			if (s[i] == 34)
+			if (s[i] == 39)
 			{
 				i++;
-				while (s[i] != 34 && s[i] != c) // 9
+				while (s[i] != 39 && s[i] != c) // 9
 				{
 					i++;
  				}
@@ -144,16 +155,6 @@ void *ft_free(char **ptr, int j)
 	free(ptr);
 	return (0);
 }
-
-// int check_start(char const *s, char c, int i)
-// {
-// 	while (s[i] && s[i] == c)
-// 		i++;
-// 	if (s[i] == 34)
-// 		i++;
-
-// 	return (i);
-// }
 
 char **ft_split(char const *s, char c)
 {

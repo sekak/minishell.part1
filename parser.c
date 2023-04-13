@@ -6,7 +6,7 @@
 /*   By: asekkak <asekkak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:09:44 by asekkak           #+#    #+#             */
-/*   Updated: 2023/04/08 13:25:15 by asekkak          ###   ########.fr       */
+/*   Updated: 2023/04/10 16:49:02 by asekkak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,14 +103,36 @@ int check_pipe(t_lexer *head)
 	}
 	return (1);
 }
+ 
+// int check_env(char *str, int count)
+// {
+// 	static int  i = 0;
+// 	// size_t j = 0;
+// 	// int ret = 0;
+// 	// int ret = 0;
+	
+// 	while (str[i] && i < count)
+// 	{
+// 		if(str[i] == '$' && str[i - 1] == 39)
+// 		{
+// 			while(str[i] != 39)
+// 				i++;
+// 			i++;
+// 			return(i);
+// 		}
+// 		i++;
+// 	}
+// 	 return(i);
+// }
 
-int check_dollar(t_lexer *head)
+int check_dollar(t_lexer *head, char *input)
 {
+	 
 	int i = 0;
 	int j = 0;
 	int count = 0;
 	char *str;
-
+	(void)input;
 	while (head->str[i])
 	{
 		if ((str = ft_strchr(head->str[i], '$')))
@@ -123,7 +145,7 @@ int check_dollar(t_lexer *head)
 	j = 0;
 	while (head->str[i])
 	{
-		if ((str = ft_strchr(head->str[i], '$')))
+ 		if ((str = ft_strchr(head->str[i], '$')))
 		{
 			head->env[j].dollar = str;
 			head->env->i = j;
@@ -131,8 +153,12 @@ int check_dollar(t_lexer *head)
 		}
 		i++;
 	}
+	// handle_env(head);
 	return (0);
 }
+
+
+ 
 
 int check_redirection(t_lexer *lexer)
 {
@@ -170,7 +196,7 @@ int check_redirection(t_lexer *lexer)
 	return (1);
 }
 
-void parser(t_lexer *lst)
+void parser(t_lexer *lst , char *input)
 {
 
 	t_lexer *head = lst;
@@ -182,7 +208,7 @@ void parser(t_lexer *lst)
 			head->cmd = "empty";
 		check_flag(head);
 		check_pipe(head);
-		check_dollar(head);
+		check_dollar(head, input);
 		check_redirection(head);
 		head = head->next;
 	}
